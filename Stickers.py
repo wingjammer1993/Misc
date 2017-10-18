@@ -63,9 +63,8 @@ class Solution(object):
                         for x in range(1, (count_list_val[elem]-count_list_key[elem])+1):
                             repeat_words.append(elem)
 
-
                 if len(repeat_words):
-                   repeat = list(repeat_words)
+                    repeat = list(repeat_words)
                     max_new = []
                     while len(repeat):
                         max_len = 0
@@ -88,7 +87,6 @@ class Solution(object):
                             break
                         else:
                             count = count + 1
-
 
                 if count < min_count:
                     min_count = count
