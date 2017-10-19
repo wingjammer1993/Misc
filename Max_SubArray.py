@@ -4,14 +4,14 @@ def find_cross_subarray(arr, low, mid, high):
     summation = 0
     max_left = 0
     max_right = 0
-    for i in range(mid, low, -1):
+    for i in range(mid, low-1, -1):
         summation = summation + arr[i]
         if summation > left_sum:
             left_sum = summation
             max_left = i
     right_sum = float('-inf')
     summation = 0
-    for j in range(high, mid+1, -1):
+    for j in range(mid+1, high+1):
         summation = summation + arr[j]
         if summation > right_sum:
             right_sum = summation
@@ -35,7 +35,7 @@ def find_max_subarray(arr, low, high):
             return cross_low, cross_high, cross_sum
 
 
-a = [0, 13, -15, 20, -3, -7, 18, 20]
+a = [0, 13, -15, 20, -3, -7, 18, 20, 0, 90, -6, 99]
 save = find_max_subarray(a, 0, len(a)-1)
 print(save)
 
