@@ -1,8 +1,8 @@
 import numpy as np
 import random
 
-SWAP = 3
-SUB = 1
+SWAP = 30
+SUB = 10
 INDEL = 1
 
 # Del = 1
@@ -92,7 +92,6 @@ def common_substrings(op_seq, length, x):
 
     common_strings = []
     substring = ""
-
     i = 0
     j = 0
     k = 0
@@ -107,22 +106,26 @@ def common_substrings(op_seq, length, x):
         if op_seq[k] == 1:
             if len(substring) >= length:
                 common_strings.append(substring)
+                substring = ""
             i += 1
 
         if op_seq[k] == 2:
             if len(substring) >= length:
                 common_strings.append(substring)
+                substring = ""
             j += 1
 
         if op_seq[k] == 3:
             if len(substring) >= length:
                 common_strings.append(substring)
+                substring = ""
             i += 1
             j += 1
 
         if op_seq[k] == 4:
             if len(substring) >= length:
                 common_strings.append(substring)
+                substring = ""
             i += 2
             j += 2
 
@@ -132,16 +135,21 @@ def common_substrings(op_seq, length, x):
 
 if __name__ == "__main__":
 
-    x1 = 'EXPONENTIAL'
-    y1 = 'POLYNOMIAL'
-    lg = 1
+    with open('csci3104_F2017_PS7_data_string_x.txt') as read_x:
+        x1 = read_x.read()
+
+    with open('csci3104_F2017_PS7_data_string_y.txt') as read_y:
+        y1 = read_y.read()
+
+    # x1 = 'EXPONENTIAL'
+    # y1 = 'POLYNOMIAL'
+    lg = 242
     op_cost, backtrack = string_alignment(x1, y1)
     optimum = extract_alignment(op_cost, x1, y1)
     common = common_substrings(optimum, lg, x1)
     print(common)
-    print(optimum)
-    print(op_cost)
-    print(backtrack)
+
+
 
 
 
