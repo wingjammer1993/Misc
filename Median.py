@@ -44,6 +44,6 @@ def partition(arr, p, r):
 
 
 a = [10, 2, 5, 3, 7, 13, 1, 6]
-save = median_stats(a, 0, len(a)-1, 5)
+save = median_stats(a, 0, len(a)-1, 4)
 print(save)
 

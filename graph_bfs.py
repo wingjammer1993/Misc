@@ -1,3 +1,4 @@
+
 def bfs(i_graph, start):
     visited, queue = set(), [start]
     while queue:
