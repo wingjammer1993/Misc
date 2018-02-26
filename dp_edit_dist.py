@@ -135,18 +135,18 @@ def common_substrings(op_seq, length, x):
 
 if __name__ == "__main__":
 
-    with open('csci3104_F2017_PS7_data_string_x.txt') as read_x:
+    with open('x.txt') as read_x:
         x1 = read_x.read()
 
-    with open('csci3104_F2017_PS7_data_string_y.txt') as read_y:
+    with open('y.txt') as read_y:
         y1 = read_y.read()
 
-    # x1 = 'EXPONENTIAL'
-    # y1 = 'POLYNOMIAL'
-    lg = 242
+    lg = 10
     op_cost, backtrack = string_alignment(x1, y1)
     optimum = extract_alignment(op_cost, x1, y1)
     common = common_substrings(optimum, lg, x1)
+    #print(op_cost)
+    print(optimum)
     print(common)
 
 
