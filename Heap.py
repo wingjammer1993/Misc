@@ -58,12 +58,6 @@ class Heap:
 			self.sift_down(0)
 
 
-
-
-
-
-
-
 h = Heap()
 h.insert(10)
 h.insert(9)
