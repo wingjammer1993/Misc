@@ -1,6 +1,12 @@
 import numpy as np
 import csv
 import itertools
+import re
+
+
+def natural_sort(s, _nsre=re.compile('([0-9]+)')):
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split(_nsre, s)]
 
 
 def create_random_seating(section_map_dict, room_map_dict):
@@ -8,6 +14,7 @@ def create_random_seating(section_map_dict, room_map_dict):
 	total_seat_ids = sum(section_map_dict.values())
 	seat_id_list = set()
 	seat_id = ""
+	sorted_seating = []
 	for i in range(0, total_seat_ids):
 		while seat_id in seat_id_list or seat_id == "":
 			row = np.random.choice(list(room_map_dict.keys()))
@@ -22,8 +29,10 @@ def create_random_seating(section_map_dict, room_map_dict):
 		set_list = list(seat_id_list)
 		seat_sec = np.random.choice(set_list, num_sec, replace=False).tolist()
 		seating_map[section] = seat_sec
+		sorted_seating.extend(seat_sec)
 		seat_id_list = seat_id_list - set(seat_sec)
-	return seating_map
+	sorted_seating.sort(key=natural_sort)
+	return seating_map, sorted_seating
 
 
 if __name__ == "__main__":
@@ -36,13 +45,16 @@ if __name__ == "__main__":
 	             'I': 30, 'J': 33, 'K': 33,'L': 34,
 	             'M': 37, 'N':37 ,'O': 28}
 
-	dict_section = create_random_seating(sections_map, room_map)
+	dict_section, sorted_seats = create_random_seating(sections_map, room_map)
+	print(sorted_seats)
 
 	keys = sorted(dict_section.keys())
 	with open("test.csv", "wb") as outfile:
 		writer = csv.writer(outfile)
 		writer.writerow(dict_section.keys())
 		writer.writerows(itertools.izip_longest(*dict_section.values()))
+
+
 
 
 
