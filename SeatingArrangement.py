@@ -6,15 +6,15 @@ def create_random_seating(section_map_dict, room_map_dict):
 	for section in section_map_dict:
 		for i in range(0, section_map_dict[section]):
 			row = np.random.choice(list(room_map_dict.keys()))
-			seat_list = np.linspace(1, room_map_dict[row])
+			seat_list = list(range(1, room_map_dict[row]))
 			column = np.random.choice(seat_list)
 			seat_number = str(row) + str(column)
-			if section in sections_map:
-				if seat_number not in sections_map[section]:
-					sections_map[section].append(seat_number)
+			if section in seating_map:
+				if seat_number not in seating_map[section]:
+					seating_map[section].append(seat_number)
 			else:
 				list_sec = [seat_number]
-				sections_map[section] = list_sec
+				seating_map[section] = list_sec
 	return seating_map
 
 if __name__ == "__main__":
