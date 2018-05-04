@@ -15,6 +15,8 @@ def create_random_seating(section_map_dict, room_map_dict):
 	seat_id_list = set()
 	seat_id = ""
 	sorted_seating = []
+	sorted_seat_ids = {}
+	# Create valid seat number ids
 	for i in range(0, total_seat_ids):
 		while seat_id in seat_id_list or seat_id == "":
 			row = np.random.choice(list(room_map_dict.keys()))
@@ -23,6 +25,7 @@ def create_random_seating(section_map_dict, room_map_dict):
 			seat_id = str(row) + str(column)
 		if seat_id not in seat_id_list:
 				seat_id_list.add(seat_id)
+	# Randomly assign seat number ids to all the sections
 	for section in section_map_dict:
 		print(len(seat_id_list))
 		num_sec = section_map_dict[section]
@@ -31,8 +34,14 @@ def create_random_seating(section_map_dict, room_map_dict):
 		seating_map[section] = seat_sec
 		sorted_seating.extend(seat_sec)
 		seat_id_list = seat_id_list - set(seat_sec)
+	# Natural sort and divide the selected seat ids
 	sorted_seating.sort(key=natural_sort)
-	return seating_map, sorted_seating
+	for j in sorted_seating:
+		if j[0] in sorted_seat_ids:
+			sorted_seat_ids[j[0]].append(j)
+		else:
+			sorted_seat_ids[j[0]] = [j]
+	return seating_map, sorted_seat_ids
 
 
 if __name__ == "__main__":
@@ -49,10 +58,16 @@ if __name__ == "__main__":
 	print(sorted_seats)
 
 	keys = sorted(dict_section.keys())
-	with open("test.csv", "wb") as outfile:
+	with open("seating.csv", "wb") as outfile:
 		writer = csv.writer(outfile)
 		writer.writerow(dict_section.keys())
 		writer.writerows(itertools.izip_longest(*dict_section.values()))
+
+	keys = sorted(sorted_seats.keys())
+	with open("sorting.csv", "wb") as outfile:
+		writer = csv.writer(outfile)
+		writer.writerow(sorted_seats.keys())
+		writer.writerows(itertools.izip_longest(*sorted_seats.values()))
 
 
 
