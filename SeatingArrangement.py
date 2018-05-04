@@ -1,4 +1,6 @@
 import numpy as np
+import csv
+import itertools
 
 
 def create_random_seating(section_map_dict, room_map_dict):
@@ -33,7 +35,14 @@ if __name__ == "__main__":
 	             'E': 26, 'F': 26, 'G': 29,'H': 29,
 	             'I': 30, 'J': 33, 'K': 33,'L': 34,
 	             'M': 37, 'N':37 ,'O': 28}
-	print(create_random_seating(sections_map, room_map))
+
+	dict_section = create_random_seating(sections_map, room_map)
+
+	keys = sorted(dict_section.keys())
+	with open("test.csv", "wb") as outfile:
+		writer = csv.writer(outfile)
+		writer.writerow(dict_section.keys())
+		writer.writerows(itertools.izip_longest(*dict_section.values()))
 
 
 
