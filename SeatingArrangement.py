@@ -5,20 +5,14 @@ def create_random_seating(section_map_dict, room_map_dict):
 	seating_map = {}
 	total_seat_ids = sum(section_map_dict.values())
 	seat_id_list = set()
+	seat_id = ""
 	for i in range(0, total_seat_ids):
-		row = np.random.choice(list(room_map_dict.keys()))
-		valid_seat_list = list(range(1, room_map_dict[row]-1))
-		column = np.random.choice(valid_seat_list, replace=False)
-		seat_id = str(row) + str(column)
+		while seat_id in seat_id_list or seat_id == "":
+			row = np.random.choice(list(room_map_dict.keys()))
+			valid_seat_list = list(range(1, room_map_dict[row]-1))
+			column = np.random.choice(valid_seat_list, replace=False)
+			seat_id = str(row) + str(column)
 		if seat_id not in seat_id_list:
-			seat_id_list.add(seat_id)
-		else:
-			while seat_id in seat_id_list:
-				row = np.random.choice(list(room_map_dict.keys()))
-				valid_seat_list = list(range(1, room_map_dict[row] - 1))
-				column = np.random.choice(valid_seat_list, replace=False)
-				seat_id = str(row) + str(column)
-			if seat_id not in seat_id_list:
 				seat_id_list.add(seat_id)
 	for section in section_map_dict:
 		print(len(seat_id_list))
@@ -28,13 +22,6 @@ def create_random_seating(section_map_dict, room_map_dict):
 		seating_map[section] = seat_sec
 		seat_id_list = seat_id_list - set(seat_sec)
 	return seating_map
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
