@@ -46,7 +46,7 @@ def create_random_seating(section_map_dict, room_map_dict):
 
 if __name__ == "__main__":
 
-	sections_map = {101: 25, 102: 25, 103: 19, 104: 23, 105: 25, 106: 26,
+	sections_map = {101: 25, 102: 25, 103: 19, 104: 24, 105: 25, 106: 26,
 	                 107: 26, 108: 25, 109: 25, 110: 25, 111:26, 112: 25}
 
 	room_map = {'A': 12, 'B': 22, 'C': 24, 'D': 25,
