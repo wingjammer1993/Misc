@@ -20,7 +20,7 @@ def create_random_seating(section_map_dict, room_map_dict):
 	for i in range(0, total_seat_ids):
 		while seat_id in seat_id_list or seat_id == "":
 			row = np.random.choice(list(room_map_dict.keys()))
-			valid_seat_list = list(range(1, room_map_dict[row]-1))
+			valid_seat_list = list(range(1, room_map_dict[row]))
 			column = np.random.choice(valid_seat_list, replace=False)
 			seat_id = str(row) + str(column)
 		if seat_id not in seat_id_list:
